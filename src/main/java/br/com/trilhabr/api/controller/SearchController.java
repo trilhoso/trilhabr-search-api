@@ -18,7 +18,7 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
-@Controller
+@Controller(value = "search")
 public class SearchController {
 	
 	@Value("${trilhabr.userlessAuth:config}")

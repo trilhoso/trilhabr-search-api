@@ -1,5 +1,6 @@
 package br.com.trilhabr.api.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -15,6 +16,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfig {
 
+    @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
@@ -28,7 +30,7 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("TrilhaBR REST API")
-                .description("REST API de busca no banco")
+                .description("REST API de busca do TrilhaBR")
                 .version("1.0.0")
                 .license("GNU GENERAL PUBLIC LICENSE 3.0")
                 .licenseUrl("https://www.gnu.org/licenses/gpl-3.0.pt-br.html")
