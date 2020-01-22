@@ -1,25 +1,19 @@
 package br.com.trilhabr.api.config;
 
-import javax.sql.DataSource;
-
-import org.mariadb.jdbc.MariaDbDataSource;
+import com.zaxxer.hikari.HikariDataSource;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.web.client.RestTemplate;
+
+import javax.sql.DataSource;
 
 @Configuration
 public class ApiConfiguration {
 
-//    @Bean
-//    public DataSource mariaDbDataSource() {
-//        @SuppressWarnings("unchecked")
-//		DataSourceBuilder<MariaDbDataSource> mariaDbDataSource = 
-//        		(DataSourceBuilder<MariaDbDataSource>) DataSourceBuilder.create();
-//    	
-//        return mariaDbDataSource.build();
-//    }
-    
     @Bean
     public RestTemplate restTemplate() {
     	RestTemplate restTemplate = new RestTemplate();
