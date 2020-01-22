@@ -20,6 +20,8 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.sql.DataSource;
 import javax.validation.Valid;
+
+import java.util.List;
 import java.util.Optional;
 
 public class UserController {
@@ -43,4 +45,38 @@ public class UserController {
 
         return user.get();
     }
+    
+    @ApiOperation(value = "", nickname = "userGet", notes = "Retorna todos cadastro de usuario")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Sucesso", response = String.class)
+    })
+    @RequestMapping(value = "/usuarios", method = RequestMethod.GET, produces="application/json")
+    public List<User> usersGet() {
+        List<User> user;
+        try {
+            user = userRepository.findAll();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            throw new TrilhaBusinessException("Erro ao consulta usuario");
+        }
+
+        return user;
+    }
+    
+    @ApiOperation(value = "", nickname = "deleteUserById", notes = "Deleta cadastro de um usuario pelo id")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Sucesso", response = String.class)
+    })
+    @RequestMapping(value = "/usuario", method = RequestMethod.DELETE, produces="application/json")
+    public void deleteUserById(@ApiParam(value="Id do usuario para deletar", required=true) @Valid @RequestParam(value = "idUsuario", required=true) String idUsuario) {
+        
+        try {
+            userRepository.deleteById(Long.getLong(idUsuario));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            throw new TrilhaBusinessException("Erro ao deletar usuario");
+        }
+    }
+    
+    
 }
