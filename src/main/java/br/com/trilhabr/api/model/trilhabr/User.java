@@ -4,8 +4,13 @@ package br.com.trilhabr.api.model.trilhabr;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -14,96 +19,49 @@ import javax.persistence.*;
     "firstName",
     "lastName",
     "primaryTelephone",
-    "userAddress"
+    "birthDate",
+    "streetName",
+    "city",
+    "postcode",
+    "state",
+    "country"
 })
+@Getter
+@Setter
 @Entity
-@Table(name = "tb_user")
+@Table
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Email
+    @NotBlank
     @JsonProperty("email")
     private String email;
+    @NotBlank
     @JsonProperty("password")
     private String password;
+    @NotBlank
     @JsonProperty("firstName")
     private String firstName;
+    @NotBlank
     @JsonProperty("lastName")
     private String lastName;
+    @NotBlank
     @JsonProperty("primaryTelephone")
     private String primaryTelephone;
-    @OneToOne
-    @JoinColumn(name = "id")
-    @JsonProperty("userAddress")
-    private UserAddress userAddress;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @JsonProperty("email")
-    public String getEmail() {
-        return email;
-    }
-
-    @JsonProperty("email")
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    @JsonProperty("password")
-    public String getPassword() {
-        return password;
-    }
-
-    @JsonProperty("password")
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    @JsonProperty("firstName")
-    public String getFirstName() {
-        return firstName;
-    }
-
-    @JsonProperty("firstName")
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    @JsonProperty("lastName")
-    public String getLastName() {
-        return lastName;
-    }
-
-    @JsonProperty("lastName")
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    @JsonProperty("primaryTelephone")
-    public String getPrimaryTelephone() {
-        return primaryTelephone;
-    }
-
-    @JsonProperty("primaryTelephone")
-    public void setPrimaryTelephone(String primaryTelephone) {
-        this.primaryTelephone = primaryTelephone;
-    }
-
-    @JsonProperty("userAddress")
-    public UserAddress getUserAddress() {
-        return userAddress;
-    }
-
-    @JsonProperty("userAddress")
-    public void setUserAddress(UserAddress userAddress) {
-        this.userAddress = userAddress;
-    }
+    @JsonProperty("birthDate")
+    private String birthDate;
+    @JsonProperty("streetName")
+    private String streetName;
+    @JsonProperty("city")
+    private String city;
+    @JsonProperty("postcode")
+    private String postcode;
+    @JsonProperty("state")
+    private String state;
+    @JsonProperty("country")
+    private String country;
 
 }

@@ -3,6 +3,7 @@ package br.com.trilhabr.api.controller;
 import javax.validation.Valid;
 
 import br.com.trilhabr.api.exception.TrilhaBusinessException;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -13,12 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
-
 @Controller
+@Api(value = "Search operations")
 public class SearchController {
 	
 	@Value("${trilhabr.userlessAuth:config}")
