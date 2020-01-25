@@ -16,11 +16,11 @@ import javax.persistence.*;
     "country"
 })
 @Entity
-@Table(name = "userAddress")
+@Table(name = "user_address")
 public class UserAddress {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @JsonProperty("streetName")
     private String streetName;

@@ -1,14 +1,7 @@
 package br.com.trilhabr.api.repository;
 
-import javax.sql.DataSource;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
+//public interface LocalRepository extends JpaRepository<Local, Long> {
 
-public class LocalRepository {
-
-	@Autowired
-	DataSource ds;
-	
-	private final static String SQL_LIST_LOCAIS = "";
-
-}
+//}

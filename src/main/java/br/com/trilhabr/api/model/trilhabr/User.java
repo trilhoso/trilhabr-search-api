@@ -17,11 +17,11 @@ import javax.persistence.*;
     "userAddress"
 })
 @Entity
-@Table(name = "user")
+@Table(name = "tb_user")
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @JsonProperty("email")
     private String email;
@@ -33,8 +33,8 @@ public class User {
     private String lastName;
     @JsonProperty("primaryTelephone")
     private String primaryTelephone;
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinTable(name = "userAddress")
+    @OneToOne
+    @JoinColumn(name = "id")
     @JsonProperty("userAddress")
     private UserAddress userAddress;
 
