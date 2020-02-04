@@ -37,6 +37,20 @@ public class UserOperation {
         return new ResponseEntity<>(user.get(), HttpStatus.OK);
     }
 
+    public ResponseEntity<Void> updateUserById(User body) {
+        try {
+            if (!userRepository.existsById(body.getId()))
+                throw new TrilhaBusinessException("Cadastro de usuario não existe");
+
+            userRepository.saveAndFlush(body);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            throw new TrilhaBusinessException("Erro ao cadastrar usuario");
+        }
+
+        return new ResponseEntity<>(null, HttpStatus.CREATED);
+    }
+
     public ResponseEntity<Void> insertUserPost(User body) {
         try {
             if (body.getId() != null)

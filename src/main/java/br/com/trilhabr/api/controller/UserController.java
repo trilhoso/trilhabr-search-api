@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@Api(value = "user", description = "User operations")
+@Api(value = "user", description = "UserDTO operations")
 public class UserController {
 
     @Autowired
@@ -35,21 +35,37 @@ public class UserController {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Sucesso", response = User.class)
     })
-    @RequestMapping(value = "/login", method = RequestMethod.POST, produces="application/json")
+    @RequestMapping(value = "/login",
+            produces="application/json",
+            method = RequestMethod.POST)
     public ResponseEntity<User> loginByEmailAndPassword(@ApiParam(value="email do usuario para login", required=true) @Valid @RequestParam(value = "email", required=true) String email,
-                                       @ApiParam(value="senha do usuario para login", required=true) @Valid @RequestParam(value = "senha", required=true) String senha) {
+                                                        @ApiParam(value="senha do usuario para login", required=true) @Valid @RequestParam(value = "senha", required=true) String senha) {
         return operation.loginByEmailAndPassword(email, senha);
     }
-    
+
     @ApiOperation(value = "", nickname = "insertUserPost", notes = "Usuario para cadastro")
     @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Usuario cadastrado", response = String.class)
+            @ApiResponse(code = 201, message = "Usuario cadastrado")
     })
-    @RequestMapping(value = "/usuario", method = RequestMethod.POST, produces="application/json")
+    @RequestMapping(value = "/usuario",
+            method = RequestMethod.POST,
+            consumes ="application/json",
+            produces="application/json")
     public ResponseEntity<Void> insertUserPost(@ApiParam(value="body", required=true) @Valid @RequestBody(required=true) User body) {
         return operation.insertUserPost(body);
     }
-    
+
+    @ApiOperation(value = "", nickname = "updateUserById", notes = "Retorna atualização de um usuario")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Usuario atualizado")
+    })
+    @RequestMapping(value = "/usuario",
+            produces="application/json",
+            method = RequestMethod.PUT)
+    public ResponseEntity<Void> updateUserById(@ApiParam(value="body", required=true) @Valid @RequestBody(required=true) User body) {
+        return operation.updateUserById(body);
+    }
+
     @ApiOperation(value = "", nickname = "deleteUserById", notes = "Deleta cadastro de um usuario pelo id")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Sucesso", response = String.class)
@@ -58,21 +74,4 @@ public class UserController {
     public ResponseEntity<Void> deleteUserById(@ApiParam(value="Id do usuario para deletar", required=true) @Valid @RequestParam(value = "idUsuario", required=true) String idUsuario) {
         return operation.deleteUserById(idUsuario);
     }
-
-//    @ApiOperation(value = "", nickname = "userGet", notes = "Retorna todos cadastro de usuario")
-//    @ApiResponses(value = {
-//            @ApiResponse(code = 200, message = "Sucesso", response = String.class)
-//    })
-//    @RequestMapping(value = "/usuarios", method = RequestMethod.GET, produces="application/json")
-//    public List<User> usersGet() {
-//        List<User> user;
-//        try {
-//            user = userRepository.findAll();
-//        } catch (Exception e) {
-//            System.out.println(e.getMessage());
-//            throw new TrilhaBusinessException("Erro ao consulta usuario");
-//        }
-//
-//        return user;
-//    }
 }
