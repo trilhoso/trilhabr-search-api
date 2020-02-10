@@ -50,17 +50,16 @@ public class LocaisOperation {
             throw new TrilhaBusinessException("Erro ao consulta locais na APIFourSquare");
         }
 
-//        if (locaisFourSquare != null && locaisFourSquare.getResponseFourSquare() != null
-//                && locaisFourSquare.getResponseFourSquare().getVenues() != null
-//                && !locaisFourSquare.getResponseFourSquare().getVenues().isEmpty()) {
-//            detailedLocaisFourSquare =
-//                    locaisFourSquareDetailedBuilder.buildDetailedLocaisFourSquare(locaisFourSquare, userlessAuth, restTemplate);
-//        }
-//
-//        if (detailedLocaisFourSquare != null && detailedLocaisFourSquare.getResponseFourSquare() != null) {
-//            locais = buildLocais(detailedLocaisFourSquare);
-//        }
-        locais = buildLocais(locaisFourSquare);
+        if (locaisFourSquare != null && locaisFourSquare.getResponseFourSquare() != null
+                && locaisFourSquare.getResponseFourSquare().getVenues() != null
+                && !locaisFourSquare.getResponseFourSquare().getVenues().isEmpty()) {
+            detailedLocaisFourSquare =
+                    locaisFourSquareDetailedBuilder.buildDetailedLocaisFourSquare(locaisFourSquare, userlessAuth, restTemplate);
+        }
+
+        if (detailedLocaisFourSquare != null && detailedLocaisFourSquare.getResponseFourSquare() != null) {
+            locais = buildLocais(detailedLocaisFourSquare);
+        }
 
         if (locais != null && locais.getLocalList() != null && !locais.getLocalList().isEmpty()) {
             for (Local saveLocal : locais.getLocalList()) {
@@ -145,7 +144,7 @@ public class LocaisOperation {
                     photo.append("x");
                     photo.append(item.getHeight());
                     photo.append(item.getSuffix());
-                    photoList.add(new Photo(photo.toString()));
+                    photoList.add(new Photo(photo.toString(), local));
                 }
             }
             local.setPhotoList(photoList);

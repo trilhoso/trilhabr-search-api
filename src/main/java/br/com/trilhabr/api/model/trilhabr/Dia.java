@@ -10,5 +10,5 @@ import java.util.List;
 @Setter
 public class Dia {
 
-        private List<String> horarios;
+//        private List<Lo> horarios;
 }

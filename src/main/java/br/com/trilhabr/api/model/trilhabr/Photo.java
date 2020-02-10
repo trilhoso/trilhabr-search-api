@@ -18,7 +18,8 @@ public class Photo {
     @ManyToOne(fetch = FetchType.LAZY)
     private Local local;
 
-    public Photo(String photoUrl) {
+    public Photo(String photoUrl, Local local) {
         this.photoUrl = photoUrl;
+        this.local = local;
     }
 }
