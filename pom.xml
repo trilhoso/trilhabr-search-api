@@ -71,9 +71,10 @@
 		<!-- mockserver -->
 		<dependency>
 			<groupId>org.mock-server</groupId>
-			<artifactId>mockserver-netty</artifactId>
+			<artifactId>mockserver-client-java</artifactId>
 			<version>5.9.0</version>
 		</dependency>
+
 	</dependencies>
 
 	<build>

@@ -2,11 +2,16 @@ package br.com.trilhabr.api.mock;
 
 import org.mockserver.client.MockServerClient;
 
+import java.io.*;
+
 import static org.mockserver.model.HttpRequest.request;
 import static org.mockserver.model.HttpResponse.response;
 import static org.mockserver.model.Parameter.param;
 
 public class TrilhaBrMockServerClient {
+
+    private static final String RESPONSE_PATH = File.separator + "mock"
+            + File.separator + "response" + File.separator;
 
     public void scenarioRotas01() {
         new MockServerClient("localhost", 8080)
@@ -24,7 +29,7 @@ public class TrilhaBrMockServerClient {
                 .respond(
                         response()
                                 .withStatusCode(200)
-                                .withBody("some_response_body")
+                                .withBody(fileToString(RESPONSE_PATH + "response_scenarioRotas01.txt"))
                 );
     }
 
@@ -44,7 +49,7 @@ public class TrilhaBrMockServerClient {
                 .respond(
                         response()
                                 .withStatusCode(200)
-                                .withBody("some_response_body")
+                                .withBody(fileToString(RESPONSE_PATH + "response_scenarioRotas02.txt"))
                 );
     }
 
@@ -64,7 +69,23 @@ public class TrilhaBrMockServerClient {
                 .respond(
                         response()
                                 .withStatusCode(200)
-                                .withBody("some_response_body")
+                                .withBody(fileToString(RESPONSE_PATH + "response_scenarioRotas03.txt"))
                 );
+    }
+
+    private String fileToString(String file) {
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(file);
+        StringBuilder resuStringBuilder = new StringBuilder();
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                resuStringBuilder.append(line);
+            }
+        } catch (IOException e) {
+            System.err.println("Falha ao ler arquivo.");
+            e.getCause();
+        }
+
+        return resuStringBuilder.toString();
     }
 }
