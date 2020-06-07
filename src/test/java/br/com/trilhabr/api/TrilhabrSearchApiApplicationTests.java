@@ -8,6 +8,7 @@ class TrilhabrSearchApiApplicationTests {
 
 	@Test
 	void contextLoads() {
+		System.out.println("Skiped Tests");
 	}
 
 }
